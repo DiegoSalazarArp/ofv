@@ -1,7 +1,9 @@
+import { SelectProfile } from "@/components/auth/select-profile";
+
 export default function Page() {
   return (
-    <div>
-      <h1>User Profile</h1>
+    <div className="flex h-screen w-full items-center justify-center px-4">
+      <SelectProfile />
     </div>
   )
 }

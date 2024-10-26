@@ -40,13 +40,16 @@ export function LoginForm() {
             </div>
             <Input id="password" type="password" placeholder="Escriba su contraseña" required />
           </div>
-          <Button type="submit" className="w-full">
-            Login
-          </Button>
+          <Link href="/login/user-profile">
+            <Button type="submit" className="w-full">
+
+              Login
+            </Button>
+          </Link>
         </div>
         <div className="mt-4 text-center text-sm">
           No tienes acceso?{" "}
-          <Link href="#" className="underline">
+          <Link href="" className="underline">
             Crear cuenta
           </Link>
         </div>
