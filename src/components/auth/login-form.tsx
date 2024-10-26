@@ -17,40 +17,37 @@ export function LoginForm() {
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Bienvenido a Oficina Virtual. Por favor, inicia sesión.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="username">Username</Label>
             <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
+              id="username"
+              type="text"
+              placeholder="Escriba su nombre de usuario"
               required
             />
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <Link href="#" className="ml-auto inline-block text-sm underline">
-                Forgot your password?
+              <Link href="/login/recovery" className="ml-auto inline-block text-sm underline">
+                Olvidaste tu contraseña?
               </Link>
             </div>
-            <Input id="password" type="password" required />
+            <Input id="password" type="password" placeholder="Escriba su contraseña" required />
           </div>
           <Button type="submit" className="w-full">
             Login
           </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Don&apos;t have an account?{" "}
+          No tienes acceso?{" "}
           <Link href="#" className="underline">
-            Sign up
+            Crear cuenta
           </Link>
         </div>
       </CardContent>
