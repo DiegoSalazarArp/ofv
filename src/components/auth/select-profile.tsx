@@ -20,9 +20,12 @@ export function SelectProfile() {
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
-          <Button type="submit" className="w-full">
-            Administrador SURA
-          </Button>
+          <Link href="/dashboard">
+
+            <Button type="submit" className="w-full">
+              Administrador SURA
+            </Button>
+          </Link>
           <Button type="submit" className="w-full">
             Administrador Compañía BCI
           </Button>
