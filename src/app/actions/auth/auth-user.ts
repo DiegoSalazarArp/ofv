@@ -1,6 +1,6 @@
 "use server"
 
-import { getSessions, login as Login } from "@/lib/auth/mok";
+import { login as Login } from "@/lib/auth/mok";
 import { redirect } from "next/navigation";
 
 export async function authenticateUserMOK(prevState: any, formData: FormData) {
