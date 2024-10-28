@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export function authenticateUserMOK() {
-  return "hi"
+  redirect("/login?message=Usuario autenticado")
 }

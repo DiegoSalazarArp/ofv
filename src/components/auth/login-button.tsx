@@ -1,21 +1,20 @@
-"use client"
-import { useFormStatus } from "react-dom"
-import { Button } from "../ui/button"
+"use client";
 
-export default function LoginButton() {
+import { useFormStatus } from "react-dom";
+import { type ComponentProps } from "react";
 
-  const { pending, data, method, action } = useFormStatus();
+type Props = ComponentProps<"button"> & {
+  pendingText?: string;
+};
 
-  const handleLogin = async () => {
-    setTimeout(() => {
-    }, 4000)
+export function SubmitButton({ children, pendingText, ...props }: Props) {
+  const { pending, action } = useFormStatus();
 
-
-  }
+  const isPending = pending && action === props.formAction;
 
   return (
-    <Button onClick={handleLogin} type="submit" className="w-full" disabled={pending}>
-      {pending ? "Loading..." : "Login"}
-    </Button>
-  )
+    <button {...props} type="submit" aria-disabled={pending}>
+      {isPending ? pendingText : children}
+    </button>
+  );
 }
