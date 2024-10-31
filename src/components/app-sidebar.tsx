@@ -1,6 +1,7 @@
 "use client"
 
-import * as React from "react"
+export const dynamic = 'force-dynamic'
+
 import {
   BookOpen,
   Bot,
@@ -11,8 +12,9 @@ import {
   PieChart,
   Send,
   Settings2,
-  SquareTerminal,
+  SquareTerminal
 } from "lucide-react"
+import * as React from "react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -27,6 +29,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { transformMenu } from "@/lib/functions/lib"
 
 const data = {
   user: {
@@ -152,7 +155,9 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ menu, ...props }: React.ComponentProps<typeof Sidebar> & { menu: any }) {
+  const navMainMen = transformMenu(menu.submenu);
+
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
@@ -173,11 +178,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={navMainMen} />
         <NavProjects projects={data.projects} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
+
+        {/* <pre>{JSON.stringify(menu, null, 2)}</pre> */}
+
         <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>

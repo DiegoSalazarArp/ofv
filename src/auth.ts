@@ -25,7 +25,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           jwt: jwt.data
         }
 
-        console.log({ info })
 
         const finalUser = {
           name: info

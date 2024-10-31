@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 
 import {
   Collapsible,
@@ -18,36 +18,26 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
+import { NavItem } from "@/lib/functions/lib"
 
 export function NavMain({
   items,
 }: {
-  items: {
-    title: string
-    url: string
-    icon: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
-  }[]
+  items: NavItem[]
 }) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
-          <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
-                  <item.icon />
-                  <span>{item.title}</span>
-                </a>
-              </SidebarMenuButton>
-              {item.items?.length ? (
-                <>
+        {items.map((item, index) => (
+          <SidebarMenuItem key={index}>
+            {item.items && item.items.length > 0 ? (
+              // Si el elemento tiene hijos, renderizamos el colapsable
+              <Collapsible asChild defaultOpen={item.isActive}>
+                <div>
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <span>{item.title}</span>
+                  </SidebarMenuButton>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuAction className="data-[state=open]:rotate-90">
                       <ChevronRight />
@@ -56,8 +46,8 @@ export function NavMain({
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      {item.items?.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem.title}>
+                      {item.items.map((subItem, subIndex) => (
+                        <SidebarMenuSubItem key={subIndex}>
                           <SidebarMenuSubButton asChild>
                             <a href={subItem.url}>
                               <span>{subItem.title}</span>
@@ -67,10 +57,17 @@ export function NavMain({
                       ))}
                     </SidebarMenuSub>
                   </CollapsibleContent>
-                </>
-              ) : null}
-            </SidebarMenuItem>
-          </Collapsible>
+                </div>
+              </Collapsible>
+            ) : (
+              // Si el elemento no tiene hijos, lo hacemos clickeable
+              <SidebarMenuButton asChild tooltip={item.title}>
+                <a href={item.url}>
+                  <span>{item.title}</span>
+                </a>
+              </SidebarMenuButton>
+            )}
+          </SidebarMenuItem>
         ))}
       </SidebarMenu>
     </SidebarGroup>

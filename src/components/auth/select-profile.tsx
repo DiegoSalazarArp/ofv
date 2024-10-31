@@ -7,8 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui
 export async function SelectProfile({ searchParams }: { searchParams: { idSession: string } }) {
   const sessions = await getSessions(searchParams.idSession);
 
-  // console.log({ sessions })
-
   return (
     <div className="flex items-center justify-center h-screen">
       <Card className="mx-auto max-w-sm">

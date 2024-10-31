@@ -1,3 +1,4 @@
+import { auth } from "@/auth"
 import { AppSidebar } from "@/components/app-sidebar"
 import { ModeToggle } from "@/components/mode-toggle"
 import {
@@ -6,10 +7,12 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const session = await auth()
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar menu={session?.user} />
       <SidebarInset>
 
         <div className="flex  h-16 items-center justify-between gap-2 px-4">

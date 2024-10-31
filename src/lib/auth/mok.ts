@@ -48,24 +48,51 @@ export const getInfoUser = async (token: string) => {
 }
 
 export const getMenu = async (token: string) => {
-  return await fetch(`https://apisesiones.grupomok.com/api/getMenu`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-    },
-  }).then(res => res.json())
+  try {
+    const response = await fetch(`https://apisesiones.grupomok.com/api/getMenu`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      // Agregar estas opciones para CORS
+      mode: 'cors',
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching menu:', error);
+    throw error;
+  }
 }
 
-
 export async function getSubmenu(menuCod: number, token: string) {
-  return await fetch(`https://apisesiones.grupomok.com/api/getMenuItems?menuCod=${menuCod}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
-    },
-  }).then(res => res.json())
+  try {
+    const response = await fetch(`https://apisesiones.grupomok.com/api/getMenuItems?menuCod=${menuCod}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      // Agregar estas opciones para CORS
+      mode: 'cors',
+      credentials: 'include'
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching submenu:', error);
+    throw error;
+  }
 }
 
 
