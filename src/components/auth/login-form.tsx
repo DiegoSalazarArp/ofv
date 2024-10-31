@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 
+import { authenticate } from "@/app/actions/auth/auth-user"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -13,12 +14,10 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState } from "react-dom"
-import { authenticateUserMOK } from "@/app/actions/auth/auth-user"
-import { SubmitButton } from "./login-button"
 
 export function LoginForm({ searchParams }: { searchParams: { message: string } }) {
 
-  const [_, formAction] = useFormState(authenticateUserMOK, null)
+  const [_, formAction] = useFormState(authenticate, null)
 
   return (
     <div>

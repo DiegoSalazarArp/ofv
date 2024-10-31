@@ -1,19 +1,28 @@
 "use server"
 
-import { login as Login } from "@/lib/auth/mok";
+import { login } from "@/lib/auth/mok";
 import { redirect } from "next/navigation";
 
-export async function authenticateUserMOK(prevState: any, formData: FormData) {
+export async function authenticate(prevState: any, formData: FormData) {
+  const usr = formData.get('username') as string
+  const pwd = formData.get('password') as string
 
-  // get the values from the form
-  const { username, password } = Object.fromEntries(formData) as { username: string, password: string };
+  const body = {
+    usr,
+    pwd,
+    sitioCod: 24
+  }
 
-  // 1.- Fetch the user data from the API
-  const login = await Login(username, password)
+  const res = await login(body)
 
-  if (login.codigo === -1) redirect(`/login?message=${login.mensaje}`)
 
-  // 2.- Redirect to the user profile page with the data id token 
-  redirect(`/login/user-profile?id=${login.data}`)
+  // Verificar si la respuesta es válida
+  if (!res || !res.data || res.codigo !== 0) {
+    console.error("Error en la autenticación:", res);
+    return;
+  }
+
+  const queryParams = new URLSearchParams(res.data).toString()
+  redirect(`/login/user-profile?idSession=${encodeURIComponent(queryParams)}`)
+
 }
-
