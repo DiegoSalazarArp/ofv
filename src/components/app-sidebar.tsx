@@ -155,8 +155,18 @@ const data = {
   ],
 }
 
-export function AppSidebar({ menu, ...props }: React.ComponentProps<typeof Sidebar> & { menu: any }) {
-  const navMainMen = transformMenu(menu.submenu);
+
+
+
+
+export function AppSidebar({ dataUser, ...props }: React.ComponentProps<typeof Sidebar> & { dataUser: any }) {
+
+  const navMainMen = transformMenu(dataUser.submenu);
+
+  let user = {
+    name: dataUser.name.UsuNombre,
+    email: dataUser.name.UsuMail,
+  }
 
   return (
     <Sidebar variant="inset" {...props}>
@@ -169,8 +179,13 @@ export function AppSidebar({ menu, ...props }: React.ComponentProps<typeof Sideb
                   <Command className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate">
+                    <span className="font-semibold">
+                      MPRO
+                    </span>
+                    <span> Liquidadores</span>
+                  </span>
+                  <span className="truncate text-xs">Oficina Virtual</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -183,10 +198,7 @@ export function AppSidebar({ menu, ...props }: React.ComponentProps<typeof Sideb
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-
-        {/* <pre>{JSON.stringify(menu, null, 2)}</pre> */}
-
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
     </Sidebar>
   )

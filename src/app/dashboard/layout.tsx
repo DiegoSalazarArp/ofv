@@ -6,13 +6,18 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { redirect } from "next/navigation"
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const session = await auth()
 
+  if (!session) {
+    redirect('/')
+  }
+
   return (
     <SidebarProvider>
-      <AppSidebar menu={session?.user} />
+      <AppSidebar dataUser={session?.user} />
       <SidebarInset>
 
         <div className="flex  h-16 items-center justify-between gap-2 px-4">
