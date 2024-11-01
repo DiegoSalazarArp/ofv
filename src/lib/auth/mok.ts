@@ -66,7 +66,6 @@ export const getMenu = async (token: string) => {
 
     return await response.json();
   } catch (error) {
-    console.error('Error fetching menu:', error);
     throw error;
   }
 }
@@ -90,7 +89,6 @@ export async function getSubmenu(menuCod: number, token: string) {
 
     return await response.json();
   } catch (error) {
-    console.error('Error fetching submenu:', error);
     throw error;
   }
 }

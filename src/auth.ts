@@ -1,3 +1,4 @@
+
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { generateJWT, getInfoUser, getMenu, getSubmenu } from "./lib/auth/mok"
@@ -42,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       session.user.submenu = await getSubmenu(31, session.user.name.jwt)
       return session
     },
-    async redirect({ url, baseUrl }: { url: string, baseUrl: string }) {
+    async redirect({ baseUrl }: { url: string, baseUrl: string }) {
       return `${baseUrl}/dashboard`
     }
   },

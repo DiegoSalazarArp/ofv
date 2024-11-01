@@ -18,7 +18,6 @@ export async function authenticate(prevState: any, formData: FormData) {
 
   // Verificar si la respuesta es válida
   if (!res || !res.data || res.codigo !== 0) {
-    console.error("Error en la autenticación:", res);
     return;
   }
 

@@ -155,10 +155,6 @@ const data = {
   ],
 }
 
-
-
-
-
 export function AppSidebar({ dataUser, ...props }: React.ComponentProps<typeof Sidebar> & { dataUser: any }) {
 
   const navMainMen = transformMenu(dataUser.submenu);
@@ -166,6 +162,7 @@ export function AppSidebar({ dataUser, ...props }: React.ComponentProps<typeof S
   let user = {
     name: dataUser.name.UsuNombre,
     email: dataUser.name.UsuMail,
+    usuCodigo: dataUser.name.UsuCodigo
   }
 
   return (
