@@ -1,7 +1,17 @@
 "use server"
 
-import { login } from "@/lib/auth/mok";
+import { login, recoveryPassword as recoveryPasswordMok } from "@/lib/auth/mok";
 import { redirect } from "next/navigation";
+
+
+export async function recoveryPassword(prevState: any, formData: FormData) {
+  const username = formData.get('username') as string
+  const res = await recoveryPasswordMok(username)
+
+
+  console.log({ res })
+}
+
 
 export async function authenticate(prevState: any, formData: FormData) {
   const usr = formData.get('username') as string

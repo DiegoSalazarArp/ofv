@@ -1,5 +1,12 @@
 'use server'
 
+
+export const recoveryPassword = async (username: string) => {
+  return await fetch(`https://apisesiones.grupomok.com/api/sendRecoveryEmail?UsuId=${username}`)
+    .then(res => res.json())
+}
+
+
 export const login = async (body: any) => {
   return await fetch("https://apisesiones.grupomok.com/api/getLogin", {
     method: "POST",
@@ -92,5 +99,6 @@ export async function getSubmenu(menuCod: number, token: string) {
     throw error;
   }
 }
+
 
 
