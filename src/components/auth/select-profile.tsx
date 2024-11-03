@@ -1,11 +1,18 @@
 import { signIn } from "@/auth";
 import { getSessions } from "@/lib/auth/mok";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export async function SelectProfile({ searchParams }: { searchParams: { idSession: string } }) {
   const sessions = await getSessions(searchParams.idSession);
+
+
+  if (!sessions || sessions.length === 0) {
+    redirect('/login?message=Sesión expirada o inválida');
+  }
+
 
   return (
     <div className="flex items-center justify-center h-screen">

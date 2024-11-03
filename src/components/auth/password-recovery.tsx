@@ -52,21 +52,17 @@ export function PasswordRecoveryForm({ searchParams }: { searchParams: { message
                         </Link>
                     </div>
                 </CardContent>
+
             </Card>
-            {/* {state?.message && (
-        <div className="flex items-center justify-center gap-2 my-2">
-          <div className={`flex items-center py-2 px-4 w-full rounded-md justify-center ${state.success ? 'bg-green-100' : 'bg-red-100'}`}>
-            <p className={state.success ? 'text-green-600' : 'text-red-600'}>{state.message}</p>
-          </div>
-        </div>
-      )} */}
-            {searchParams?.message && (
-                <div className="flex items-center justify-center gap-2 my-2">
-                    <div className="flex items-center py-2 px-4 w-full rounded-md justify-center bg-red-100">
-                        <p className="text-red-400">{searchParams.message}</p>
+            <div className="mt-2 mx-auto max-w-sm ">
+                {searchParams?.message && (
+                    <div className="flex items-center justify-center gap-2 my-2">
+                        <div className="flex items-center py-4 px-4 w-full rounded-lg justify-center bg-green-200">
+                            <p className="text-sm text-green-600"> {searchParams.message}</p>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     )
 }

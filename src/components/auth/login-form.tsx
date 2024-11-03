@@ -66,15 +66,15 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
 
         </CardContent>
       </Card>
-      {
-        searchParams?.message && (
+      <div className="mt-2 mx-auto max-w-sm ">
+        {searchParams?.message && (
           <div className="flex items-center justify-center gap-2 my-2">
-            <div className="flex items-center py-2 px-4 w-full rounded-md justify-center bg-red-100">
-              <p className="text-red-400">{searchParams?.message}</p>
+            <div className="flex items-center py-4 px-4 w-full rounded-lg justify-center bg-red-200">
+              <p className="text-sm text-red-600"> {searchParams.message}</p>
             </div>
           </div>
-        )
-      }
+        )}
+      </div>
 
     </div>
   )

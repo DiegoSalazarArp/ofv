@@ -15,6 +15,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       authorize: async (credentials) => {
 
         const jwt = await generateJWT(credentials.idSesion as string, credentials.token as string)
+
         const infoUser = await getInfoUser(jwt.data)
 
         const info: any = {
