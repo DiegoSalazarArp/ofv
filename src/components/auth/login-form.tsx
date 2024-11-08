@@ -13,11 +13,32 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useFormState } from "react-dom"
+import { useFormState, useFormStatus } from "react-dom"
+
+
+
+
 
 export function LoginForm({ searchParams }: { searchParams: { message: string } }) {
 
   const [_, formAction] = useFormState(authenticate, null)
+
+  function SubmitButton() {
+    const { pending } = useFormStatus()
+
+    return (
+      <Button variant={"default"} disabled={pending}>
+        {pending ? (
+          <>
+            <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-b-transparent" />
+            Ingresando..
+          </>
+        ) : (
+          "Login"
+        )}
+      </Button>
+    )
+  }
 
   return (
     <div>
@@ -52,9 +73,7 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
                 </div>
                 <Input id="password" name="password" type="password" placeholder="Escriba su contraseña" required />
               </div>
-              <Button variant={"default"}>
-                Login
-              </Button>
+              <SubmitButton />
             </div>
           </form>
           <div className="mt-4 text-center text-sm">
