@@ -18,13 +18,28 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
-import { NavItem } from "@/lib/functions/lib"
+import { NavItem } from "@/lib/functions/types"
+import { usePathname } from "next/navigation"
 
 export function NavMain({
   items,
 }: {
   items: NavItem[]
 }) {
+
+
+  const pathname = usePathname()
+  const formatUrl = (url: string) => {
+    return `/dashboard/${url.toLowerCase().replace('.aspx', '')}`
+  }
+
+  const isItemExpanded = (item: NavItem) => {
+    if (!item.items) return false
+    return item.items.some(subItem =>
+      pathname === formatUrl(subItem.url)
+    )
+  }
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -33,7 +48,7 @@ export function NavMain({
           <SidebarMenuItem key={index}>
             {item.items && item.items.length > 0 ? (
               // Si el elemento tiene hijos, renderizamos el colapsable
-              <Collapsible asChild defaultOpen={item.isActive}>
+              <Collapsible asChild defaultOpen={isItemExpanded(item)}>
                 <div>
                   <SidebarMenuButton asChild tooltip={item.title}>
                     <span>{item.title}</span>
@@ -46,10 +61,10 @@ export function NavMain({
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      {item.items.map((subItem, subIndex) => (
+                      {item.items.map((subItem: NavItem, subIndex: number) => (
                         <SidebarMenuSubItem key={subIndex}>
-                          <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
+                          <SidebarMenuSubButton asChild className={pathname === formatUrl(subItem.url) ? 'font-semibold' : ''}>
+                            <a href={formatUrl(subItem.url)}>
                               <span>{subItem.title}</span>
                             </a>
                           </SidebarMenuSubButton>
