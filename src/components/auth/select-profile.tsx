@@ -2,8 +2,8 @@ import { signIn } from "@/auth";
 import { getSessions } from "@/lib/auth/mok";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import { SubmitButton } from "./profile-button";
 
 export async function SelectProfile({ searchParams }: { searchParams: { idSession: string } }) {
   const sessions = await getSessions(searchParams.idSession);
@@ -33,9 +33,9 @@ export async function SelectProfile({ searchParams }: { searchParams: { idSessio
             <div className="grid gap-4 items-center justify-center">
               {sessions.map((perfil: any) => (
                 <div key={perfil.IdSesion}>
-                  <Button key={perfil.IdSesion} name="idSesion" value={perfil.IdSesion} type="submit" className="w-full">
+                  <SubmitButton value={perfil.IdSesion}>
                     {perfil.NombrePerfil}
-                  </Button>
+                  </SubmitButton>
                 </div>
               ))}
             </div>

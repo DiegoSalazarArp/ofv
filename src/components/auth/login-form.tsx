@@ -15,10 +15,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useFormState, useFormStatus } from "react-dom"
 
-
-
-
-
 export function LoginForm({ searchParams }: { searchParams: { message: string } }) {
 
   const [_, formAction] = useFormState(authenticate, null)
@@ -31,7 +27,7 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
         {pending ? (
           <>
             <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-b-transparent" />
-            Ingresando..
+            Ingresando...
           </>
         ) : (
           "Login"
@@ -42,8 +38,6 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
 
   return (
     <div>
-
-
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
