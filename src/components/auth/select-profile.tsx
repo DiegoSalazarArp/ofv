@@ -8,6 +8,8 @@ import { SubmitButton } from "./profile-button";
 export async function SelectProfile({ searchParams }: { searchParams: { idSession: string } }) {
   const sessions = await getSessions(searchParams.idSession);
 
+  console.log(sessions)
+
 
   if (!sessions || sessions.length === 0) {
     redirect('/login?message=Sesión expirada o inválida');

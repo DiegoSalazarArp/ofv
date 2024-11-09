@@ -156,3 +156,4 @@ export async function getSubmenu(menuCod: number, token: string) {
     throw new Error('Error al obtener el submenú')
   }
 }
+

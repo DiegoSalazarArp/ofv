@@ -18,6 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const infoUser = await getInfoUser(jwt.data)
 
+
         const info: any = {
           UsuCodigo: infoUser.data.UsuCodigo,
           UsuNombre: infoUser.data.Usunombre,
@@ -26,7 +27,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           UsuId: infoUser.data.UsuId,
           jwt: jwt.data
         }
-
 
         const finalUser = {
           name: info

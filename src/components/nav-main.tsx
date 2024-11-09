@@ -16,9 +16,12 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
+  SidebarMenuSubItem
 } from "@/components/ui/sidebar"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { NavItem } from "@/lib/functions/types"
+import { cn } from "@/lib/utils"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 export function NavMain({
@@ -63,10 +66,28 @@ export function NavMain({
                     <SidebarMenuSub>
                       {item.items.map((subItem: NavItem, subIndex: number) => (
                         <SidebarMenuSubItem key={subIndex}>
-                          <SidebarMenuSubButton asChild className={pathname === formatUrl(subItem.url) ? 'font-semibold' : ''}>
-                            <a href={formatUrl(subItem.url)}>
-                              <span>{subItem.title}</span>
-                            </a>
+                          <SidebarMenuSubButton asChild>
+                            <TooltipProvider>
+                              <Tooltip >
+                                <div className="flex items-center ">
+
+                                  <TooltipTrigger asChild>
+                                    <Link
+                                      href={formatUrl(subItem.url)}
+                                      className={cn(
+                                        "flex w-full text-sm truncate py-1 px-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-sm",
+                                        pathname === formatUrl(subItem.url) ? 'font-semibold' : ''
+                                      )}
+                                    >
+                                      <span className="truncate">{subItem.title}</span>
+                                    </Link>
+                                  </TooltipTrigger>
+                                  <TooltipContent side="right" align="center">
+                                    <p>{subItem.title}</p>
+                                  </TooltipContent>
+                                </div>
+                              </Tooltip>
+                            </TooltipProvider>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
