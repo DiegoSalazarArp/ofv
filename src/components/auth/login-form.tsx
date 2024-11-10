@@ -55,7 +55,6 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
                   name="username"
                   type="text"
                   placeholder="Escriba su nombre de usuario"
-                  required
                 />
               </div>
               <div className="grid gap-2">
@@ -65,7 +64,7 @@ export function LoginForm({ searchParams }: { searchParams: { message: string } 
                     Olvidaste tu contraseña?
                   </Link>
                 </div>
-                <Input id="password" name="password" type="password" placeholder="Escriba su contraseña" required />
+                <Input id="password" name="password" type="password" placeholder="Escriba su contraseña" />
               </div>
               <SubmitButton />
             </div>
