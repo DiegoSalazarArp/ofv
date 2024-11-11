@@ -27,14 +27,12 @@ export async function SelectProfile({ searchParams }: { searchParams: { idSessio
           <form action={async (formData) => {
             'use server'
             const idSesion = formData.get('idSesion') as string
-            const nombrePerfil = formData.get('nombrePerfil') as string
-            await signIn('credentials', { idSesion, token: searchParams.idSession, nombrePerfil })
+            await signIn('credentials', { idSesion, token: searchParams.idSession })
           }}>
 
             <div className="grid gap-4 items-center justify-center">
               {sessions.map((perfil: any) => (
                 <div key={perfil.IdSesion} >
-                  <input type="hidden" name="nombrePerfil" value={perfil.NombrePerfil} />
                   <SubmitButton value={perfil.IdSesion}>
                     {perfil.NombrePerfil}
                   </SubmitButton>

@@ -11,7 +11,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       credentials: {
         idSesion: {},
         token: {},
-        nombrePerfil: {}
       },
       authorize: async (credentials) => {
 
@@ -19,7 +18,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const infoUser = await getInfoUser(jwt.data)
 
-        const nombrePerfil = credentials.nombrePerfil as string
 
         const info: any = {
           UsuCodigo: infoUser.data.UsuCodigo,
@@ -27,7 +25,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           UsuRut: infoUser.data.UsuRut,
           UsuMail: infoUser.data.UsuMail,
           UsuId: infoUser.data.UsuId,
-          UsuPerfil: nombrePerfil,
           jwt: jwt.data
         }
 

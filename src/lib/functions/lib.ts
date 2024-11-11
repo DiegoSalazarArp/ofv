@@ -1,20 +1,7 @@
 import { MenuItem, NavItem } from "./types";
 
 
-/**
- * Transforma un submenu en un menú de navegación jerárquico
- * @param submenu - Objeto que contiene un array de elementos MenuItem
- * @returns Array de elementos NavItem organizados jerárquicamente
- * 
- * @example
- * const submenu = {
- *   data: [
- *     { MenuItemCod: 1, ItemDescripcion: "Home", ItemLink: "/", ItemPadre: 0 },
- *     { MenuItemCod: 2, ItemDescripcion: "About", ItemLink: "/about", ItemPadre: 1 }
- *   ]
- * };
- * const navItems = transformMenu(submenu);
- */
+// Transforma el submenú en un menú de navegación
 export function transformMenu(submenu: { data: MenuItem[] }): NavItem[] {
     const data = submenu.data;
 
