@@ -8,8 +8,6 @@ import { SubmitButton } from "./profile-button";
 export async function SelectProfile({ searchParams }: { searchParams: { idSession: string } }) {
   const sessions = await getSessions(searchParams.idSession);
 
-  console.log(sessions)
-
 
   if (!sessions || sessions.length === 0) {
     redirect('/login?message=Sesión expirada o inválida');
@@ -29,12 +27,14 @@ export async function SelectProfile({ searchParams }: { searchParams: { idSessio
           <form action={async (formData) => {
             'use server'
             const idSesion = formData.get('idSesion') as string
-            await signIn('credentials', { idSesion, token: searchParams.idSession })
+            const nombrePerfil = formData.get('nombrePerfil') as string
+            await signIn('credentials', { idSesion, token: searchParams.idSession, nombrePerfil })
           }}>
 
             <div className="grid gap-4 items-center justify-center">
               {sessions.map((perfil: any) => (
-                <div key={perfil.IdSesion}>
+                <div key={perfil.IdSesion} >
+                  <input type="hidden" name="nombrePerfil" value={perfil.NombrePerfil} />
                   <SubmitButton value={perfil.IdSesion}>
                     {perfil.NombrePerfil}
                   </SubmitButton>

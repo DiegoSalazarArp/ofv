@@ -76,7 +76,7 @@ export function NavMain({
                                       href={formatUrl(subItem.url)}
                                       className={cn(
                                         "flex w-full text-sm truncate py-1 px-2 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground rounded-sm",
-                                        pathname === formatUrl(subItem.url) ? 'font-semibold' : ''
+                                        pathname === formatUrl(subItem.url) ? 'font-semibold underline' : ''
                                       )}
                                     >
                                       <span className="truncate">{subItem.title}</span>

@@ -160,7 +160,13 @@ export function AppSidebar({ dataUser, ...props }: React.ComponentProps<typeof S
   let user = {
     name: dataUser.name.UsuNombre,
     email: dataUser.name.UsuMail,
-    usuCodigo: dataUser.name.UsuCodigo
+    usuCodigo: dataUser.name.UsuCodigo,
+    usuPerfil: dataUser.name.UsuPerfil
+  }
+
+
+  if (user.usuPerfil && user.usuPerfil.includes('-')) {
+    user.usuPerfil = user.usuPerfil.split('-')[1].trim()
   }
 
   return (
