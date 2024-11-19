@@ -1,7 +1,7 @@
 
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-import { generateJWT, getInfoUser, getMenu, getSubmenu } from "./lib/auth/mok"
+import { generateJWT, getFilter, getInfoUser, getMenu, getSubmenu } from "./lib/auth/mok"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -18,6 +18,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         const infoUser = await getInfoUser(jwt.data)
 
+        // const codcia = await getFilter(process.env.FILTRO_COD!, jwt.data)
 
         const info: any = {
           UsuCodigo: infoUser.data.UsuCodigo,
@@ -25,7 +26,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           UsuRut: infoUser.data.UsuRut,
           UsuMail: infoUser.data.UsuMail,
           UsuId: infoUser.data.UsuId,
-          jwt: jwt.data
+          jwt: jwt.data,
+          // codcia: codcia.data
         }
 
         const finalUser = {
@@ -42,6 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session }: { session: any, token: any }) {
       session.user.menu = await getMenu(session.user.name.jwt)
       session.user.submenu = await getSubmenu(31, session.user.name.jwt)
+      session.user.codcia = await getFilter(process.env.FILTRO_COD!, session.user.name.jwt)
       return session
     },
     async redirect({ baseUrl }: { url: string, baseUrl: string }) {

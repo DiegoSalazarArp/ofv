@@ -44,7 +44,7 @@ export function NavMain({
   }
 
   return (
-    <SidebarGroup>
+    <SidebarGroup className="overflow-y-auto scrollbar-hide">
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item, index) => (

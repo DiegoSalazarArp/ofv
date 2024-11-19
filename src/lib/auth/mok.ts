@@ -157,3 +157,24 @@ export async function getSubmenu(menuCod: number, token: string) {
   }
 }
 
+
+export async function getFilter(idFiltro: string, token: string) {
+  try {
+    const response = await fetch(`https://apisesiones.grupomok.com/api/getFilterValue?idFiltro=${idFiltro}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json()
+    return data.data
+  } catch (error) {
+    throw new Error(`Error al obtener el filtro: ${error}`)
+  }
+}
