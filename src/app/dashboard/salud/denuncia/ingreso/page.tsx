@@ -1,7 +1,7 @@
 export default function Page() {
-    return (
-        <div>
-            Ingreso
-        </div>
-    )
+  return (
+    <div>
+      Ingreso
+    </div>
+  )
 }

@@ -33,7 +33,13 @@ export function NavMain({
 
   const pathname = usePathname()
   const formatUrl = (url: string) => {
-    return `/dashboard/${url.toLowerCase().replace('.aspx', '')}`
+    const cleanUrl = url
+      .replace(/^\.\.\//, '')  
+      .replace(/^\//, '')      
+      .toLowerCase()
+      .replace('.aspx', '');
+
+    return `/dashboard/${cleanUrl}`;
   }
 
   const isItemExpanded = (item: NavItem) => {
@@ -98,9 +104,9 @@ export function NavMain({
             ) : (
               // Si el elemento no tiene hijos, lo hacemos clickeable
               <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
+                <Link href={formatUrl(item.url)}>
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             )}
           </SidebarMenuItem>
