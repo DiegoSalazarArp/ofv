@@ -1,10 +1,12 @@
+import { DriveStep } from "driver.js";
 
-export const tourSteps = [
+export const stepsConsultaDocDuplicados = [
   {
     element: '#titulo',
     popover: {
       title: 'Bienvenido',
       description: 'Esta es la sección de consulta de documentos duplicados',
+      side: 'bottom',
       
     }
   },
@@ -13,7 +15,7 @@ export const tourSteps = [
     popover: {
       title: 'Formulario de búsqueda',
       description: 'Aquí puedes ingresar los criterios de búsqueda',
-      
+      side: 'bottom',
     }
   },
   {
@@ -21,7 +23,7 @@ export const tourSteps = [
     popover: {
       title: 'Resultados',
       description: 'Aquí se mostrarán los documentos duplicados encontrados',
-
+      side: 'top',
     }
   }
 ]; 

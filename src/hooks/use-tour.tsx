@@ -26,6 +26,8 @@ export const useTour = () => {
       doneBtnText: 'Finalizar',
       ...options,
       steps,
+
+      
     });
 
     driverObj.drive();

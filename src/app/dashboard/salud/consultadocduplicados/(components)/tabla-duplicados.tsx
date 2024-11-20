@@ -276,7 +276,7 @@ export function DataTableDemo() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  No hay resultados.
                 </TableCell>
               </TableRow>
             )}
@@ -285,8 +285,8 @@ export function DataTableDemo() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} de{" "}
+          {table.getFilteredRowModel().rows.length} fila(s) seleccionada(s).
         </div>
         <div className="space-x-2">
           <Button
@@ -295,7 +295,7 @@ export function DataTableDemo() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -303,7 +303,7 @@ export function DataTableDemo() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Siguiente
           </Button>
         </div>
       </div>
