@@ -27,7 +27,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <SidebarTrigger className="-ml-1" />
           <ModeToggle />
         </div>
-
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0 mx-12">
           {children}
         </div>

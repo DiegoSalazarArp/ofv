@@ -32,7 +32,7 @@ export const login = async (body: BodyLogin): Promise<AuthResponse> => {
     })
     return await res.json()
   } catch (error) {
-    throw new Error('Error al iniciar sesión')
+    throw new Error('Error al iniciar sesión: ' + error)
   }
 }
 
