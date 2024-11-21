@@ -9,14 +9,14 @@ interface ButtonTourProps {
 }
 
 export default function ButtonTour({ handleStartTour }: ButtonTourProps) {
-    return (
-        <Button
-            className="hover:bg-green-700 hover:text-white"
-            variant="outline"
-            onClick={handleStartTour}
-        >
-            <Sparkles color="yellow" className="h-4 w-4 animate-pulse" />
-            Iniciar Tour
-        </Button>
-    )
+  return (
+    <Button
+      className="hover:bg-green-700 hover:text-white"
+      variant="outline"
+      onClick={handleStartTour}
+    >
+      <Sparkles color="yellow" className="h-4 w-4 animate-pulse" />
+      Iniciar Tour
+    </Button>
+  )
 }
