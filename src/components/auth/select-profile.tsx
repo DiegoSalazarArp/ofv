@@ -23,7 +23,7 @@ export async function SelectProfile({ searchParams }: { searchParams: { idSessio
             Bienvenido a Oficina Virtual. Por favor, inicia sesión.
           </CardDescription>
         </CardHeader>
-        <CardContent className="overflow-auto max-h-[60vh]">
+        <CardContent className="overflow-auto max-h-[60vh] scrollbar-hide">
           <form action={async (formData) => {
             'use server'
             const idSesion = formData.get('idSesion') as string

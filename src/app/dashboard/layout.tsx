@@ -11,6 +11,9 @@ import { redirect } from "next/navigation"
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const session = await auth()
 
+  console.log(JSON.stringify(session?.user, null, 2));
+
+
   if (!session) {
     redirect('/')
   }
@@ -24,8 +27,7 @@ export default async function Layout({ children }: { children: React.ReactNode }
           <SidebarTrigger className="-ml-1" />
           <ModeToggle />
         </div>
-
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0 mx-12">
           {children}
         </div>
       </SidebarInset>
