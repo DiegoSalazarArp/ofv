@@ -15,7 +15,7 @@ export default function ButtonTour({ handleStartTour }: ButtonTourProps) {
       variant="outline"
       onClick={handleStartTour}
     >
-      <Sparkles color="yellow" className="h-4 w-4 animate-pulse" />
+      <Sparkles className="h-4 w-4 animate-pulse" />
       Iniciar Tour
     </Button>
   )
