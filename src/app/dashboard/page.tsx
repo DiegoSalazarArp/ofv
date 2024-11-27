@@ -1,4 +1,3 @@
-import { AsdComponent } from "@/components/charts/asd";
 import { BarChartComponent } from "@/components/charts/bar";
 import { LineChartComponent } from "@/components/charts/line";
 import { PieChartComponent } from "@/components/charts/pie";
@@ -18,7 +17,6 @@ export default function Page() {
       </div>
       <div className="flex flex-col gap-4">
         <BarChartComponent />
-        <AsdComponent />
 
       </div>
     </>
