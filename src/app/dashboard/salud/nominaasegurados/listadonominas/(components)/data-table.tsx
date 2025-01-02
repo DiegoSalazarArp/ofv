@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -43,45 +44,44 @@ export function DataTable<TData, TValue>({
 
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-
+  const [globalFilter, setGlobalFilter] = useState("")
 
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
-
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: 'includesString',
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
-
+      globalFilter,
     },
-
   })
 
   return (
     <div>
-        <div className="flex items-center py-4">
+      <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
+          placeholder="Buscar por Nº de Nómina o Póliza..."
+          onChange={(event) => {
+            table.setGlobalFilter(event.target.value)
+          }}
           className="max-w-sm"
+
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
+            <Button variant="outline" className="ml-4">
+              Columnas visibles
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -106,6 +106,12 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Button variant="default" className="ml-auto" >
+          <Link href="/dashboard/salud/nominaasegurados/listadonominas/crearnomina">
+          Nueva Nómina
+          </Link>
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -159,7 +165,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          Anterior
         </Button>
         <Button
           variant="outline"
@@ -167,7 +173,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          Siguiente
         </Button>
       </div>
     </div>

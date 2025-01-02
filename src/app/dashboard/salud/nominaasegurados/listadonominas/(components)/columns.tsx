@@ -3,78 +3,81 @@
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { ColumnDef } from "@tanstack/react-table"
-import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Payment = {
+// export type Payment = {
+//   id: string
+//   amount: number
+//   status: "pending" | "processing" | "success" | "failed"
+//   email: string
+// }
+export type Nomina = {
   id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
+  poliza: string 
+  estado: "pendiente" | "procesando" | "cerrada"
+  cantidadAsegurados: number
+  fecha: string
 }
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Nomina>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    accessorKey: "id",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Nº de Nómina
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
- 
-      return <div className="text-right font-medium">{formatted}</div>
+    accessorKey: "poliza",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Póliza
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
     },
   },
-
+  {
+    accessorKey: "estado",
+    header: "Estado",
+  },
+  {
+    accessorKey: "cantidadAsegurados",
+    header: "Cantidad Asegurados",
+    cell: ({ row }) => {
+      return <div className="text-center">{row.getValue("cantidadAsegurados")}</div>
+    },
+  },
+  {
+    accessorKey: "fecha",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Fecha
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
- 
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -84,15 +87,8 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Cerrar Nómina</DropdownMenuItem>
+            <DropdownMenuItem>Exportar</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
